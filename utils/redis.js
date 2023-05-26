@@ -1,32 +1,35 @@
 // RedisClient class
-import { createClient } from 'redis';
+import { createClient } from "redis";
 
 // Create a redis class
 class RedisClient {
   constructor() {
-    this.client = createClient();
+    this.client = createClient({
+      host: "localhost",
+      port: "6379",
+    });
 
     // this.client.on('connect', () => {
     // console.log('Redis client connected to the server');
     // });
-    this.client.on('error', (err) => {
+    this.client.on("error", (err) => {
       console.log(err);
     });
   }
 
   // isAlive method
-  // isAlive() {
-  // return this.client.connected;
-  // }
-
   isAlive() {
-    this.client.ping('ping', (error, result) => {
-      if (error) {
-        return false;
-      }
-      return true;
-    });
+    return this.client.connected;
   }
+
+  // isAlive() {
+  //   this.client.ping('ping', (error, result) => {
+  //     if (error) {
+  //       return false;
+  //     }
+  //     return true;
+  //   });
+  // }
 
   // Asynchronous get method
   async get(key) {
