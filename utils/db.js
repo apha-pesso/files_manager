@@ -9,7 +9,7 @@ class DBClient {
     const database = process.env.DB_DATABASE || 'files_manager';
     const url = `mongodb://${host}:${port}/${database}}`;
     this.client = new MongoClient(url, { useUnifiedTopology: true });
-	  this.status = false;
+    this.status = false;
     this.connect();
   }
 
@@ -26,7 +26,7 @@ class DBClient {
 
   // returns connection status
   isAlive() {
-	  return this.status;
+    return this.status;
   }
 
   // returns number of users
