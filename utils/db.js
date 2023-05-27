@@ -63,6 +63,35 @@ class DBClient {
     // console.log('after');
     return (status.insertedId);
   }
+
+  // Get user with email and password
+  async getUser(identifier) {
+    console.log(identifier);
+    const user = await this.client.db('files_manager').collection('users').findOne({
+      $or: [{ _id: `ObjectId(${identifier})` }, { email: identifier }],
+    });
+    return user;
+  }
+
+  /*
+  async getUser(email) {
+    const user = await this.client.db('files_manager').collection('users').findOne({ email });
+    return user;
+  }
+  */
+
+  // check user by ID
+
+  /*
+  async getUserById(mail) {
+    const user = await this.client.db('files_manager')
+    .collection('users').countDocuments({ id: mail });
+    if (user) {
+      return true;
+    }
+    return false;
+  }
+  */
 }
 
 // create and export BDclient instance
