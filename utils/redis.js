@@ -11,7 +11,7 @@ class RedisClient {
     // this.client.on('connect', () => {
     // console.log('Redis client connected to the server');
     // });
-    this.client.on('error', (err) => {
+      this.client.on('error', (err) => {
       this.connected = false;
       console.log(err);
     });
@@ -21,6 +21,15 @@ class RedisClient {
   isAlive() {
     return this.connected;
   }
+
+  // isAlive() {
+  //   this.client.ping('ping', (error, result) => {
+  //     if (error) {
+  //       return false;
+  //     }
+  //     return true;
+  //   });
+  // }
 
   // Asynchronous get method
   async get(key) {
