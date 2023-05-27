@@ -1,25 +1,25 @@
 // RedisClient class
-import { createClient } from "redis";
+import { createClient } from 'redis';
+import { promisify } from 'util';
 
 // Create a redis class
 class RedisClient {
   constructor() {
-    this.client = createClient({
-      host: "localhost",
-      port: "6379",
-    });
+    this.client = createClient();
+    this.connected = true;
 
     // this.client.on('connect', () => {
     // console.log('Redis client connected to the server');
     // });
-    this.client.on("error", (err) => {
+      this.client.on('error', (err) => {
+      this.connected = false;
       console.log(err);
     });
   }
 
   // isAlive method
   isAlive() {
-    return this.client.connected;
+    return this.connected;
   }
 
   // isAlive() {
