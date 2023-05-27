@@ -46,6 +46,23 @@ class DBClient {
       .countDocuments();
     return nbFiles;
   }
+
+  // Search for email in database
+  async emailCheck(mail) {
+    const user = await this.client.db('files_manager').collection('users').countDocuments({ email: mail });
+    if (user) {
+      return true;
+    }
+    return false;
+  }
+
+  // Add users to the database
+  async addUser(email, password) {
+    // console.log('bafore add');
+    const status = await this.client.db('files_manager').collection('users').insertOne({ email, password });
+    // console.log('after');
+    return (status.insertedId);
+  }
 }
 
 // create and export BDclient instance
