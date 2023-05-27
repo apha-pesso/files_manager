@@ -1,0 +1,100 @@
+# ignore gitignore files
+.*gitignore*
+
+# ignore __pycache__ directories
+__pycache__
+*__pycache__*
+*.pyc
+
+# ignore swap files
+*.swp
+*~
+
+# ignore .bash files
+*.bash
+
+# ignore test and intermediate C files
+*main*
+*.i
+*.o
+*.s
+
+# ignore vscode files
+.vscode
+*.vscode
+
+# ignore C executables
+*.out
+
+# ignore venv files
+venv
+*.pyc
+*venv
+*findme/*
+*myenv/*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+.pnpm-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories and config files
+node_modules/
+jspm_packages/
+babel.config.js
+package-lock.json
+package.json
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+.eslinrc.js
+
+# Optional REPL history
+.node_repl_history
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Serverless Webpack directories
+.webpack/
+
+# miscellaneous 
+*test.*
+*draft*
+
+# data files
+*.csv
+*.db
+*.rdb
+*.sql
+*.zip
+
+# backup files
+*.bak
+*.BAK
