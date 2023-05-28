@@ -24,14 +24,14 @@ const AuthController = {
     const authy = req.headers.authorization;
     // console.log(authy);
     const input = authy.split(' ')[1];
-    console.log(input);
+    // console.log(input);
     // const combo = b64Decode(input);
     const combo = Buffer.from(input, 'base64').toString('utf-8').split(':');
-    console.log(combo);
+    // console.log(combo);
     const email = combo[0];
     const hashPassword = SHA1password(combo[1]);
     const user = await mongo.getUser(email);
-    console.log(user);
+    // console.log(user);
 
     try {
       if (user.password === hashPassword) {
@@ -51,11 +51,13 @@ const AuthController = {
 
     try {
       const userId = await redisClient.get(key);
-      const user = await mongo.getUser(userId);
+      const user = await mongo.getUserById(userId);
       if (user) {
         await redisClient.del(key);
+        res.status(204).json('');
+      } else {
+        res.status(401).json({ error: 'Unauthorized' });
       }
-      res.status(204);
     } catch (error) {
       res.status(401).json({ error: 'Unauthorized' });
     }
@@ -67,14 +69,15 @@ const AuthController = {
     const key = `auth_${token}`;
     try {
       const userId = await redisClient.get(key);
-      // const datId = `ObjectId("${userId}")`;
-      // console.log(datId);
-      const user = await mongo.getUser(userId);
-      console.log(user);
-      if (user) {
-        const { id } = user;
-        const { email } = user;
-        res.status(200).json({ email, id });
+      if (userId) {
+        const user = await mongo.getUserById(userId);
+        if (user) {
+          const { id } = user;
+          const { email } = user;
+          res.status(200).json({ email, id });
+        }
+      } else {
+        res.status(401).json({ error: 'Unauthorized' });
       }
     } catch (error) {
       res.status(401).json({ error: 'Unauthorized' });

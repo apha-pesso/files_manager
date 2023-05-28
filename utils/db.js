@@ -1,5 +1,5 @@
 // DBClient class
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 // Create the DBclient class
 class DBClient {
@@ -18,7 +18,7 @@ class DBClient {
     try {
       await this.client.connect();
       this.status = true;
-      // console.log('Connected successfuly');
+      console.log('Mongo Connected successfuly');
     } catch (error) {
       console.log('Error', error);
     }
@@ -65,20 +65,26 @@ class DBClient {
   }
 
   // Get user with email and password
-  async getUser(identifier) {
+  /* async getUser(identifier) {
     console.log(identifier);
     const user = await this.client.db('files_manager').collection('users').findOne({
-      $or: [{ _id: `ObjectId(${identifier})` }, { email: identifier }],
+      $or: [{ _id: ObjectId(identifier) }, { email: identifier }],
     });
     return user;
   }
+  */
 
-  /*
+  // Get user by email
   async getUser(email) {
     const user = await this.client.db('files_manager').collection('users').findOne({ email });
     return user;
   }
-  */
+
+  // Get user by id
+  async getUserById(identifier) {
+    const user = await this.client.db('files_manager').collection('users').findOne({ _id: ObjectId(identifier) });
+    return user;
+  }
 
   // check user by ID
 
