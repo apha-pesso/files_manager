@@ -13,7 +13,7 @@ const AppController = {
   async getStats(req, res) {
     const users = await mongo.nbUsers();
     const files = await mongo.nbFiles();
-    res.status(200).send(`{"users": ${users}, "files": ${files}}`);
+    res.status(200).send(`{"users": ${users},"files": ${files}}`);
   },
 };
 
